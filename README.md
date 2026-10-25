@@ -20,7 +20,7 @@ Since the static files of the website are being served from a simple on-device f
 2. Build and upload
 3. Comment `#define FORMAT_FILESYSTEM` in *SigGen.ino*
 4. Build and upload again
-5. [Optional] If you changed the front-end code, run parcel
+5. [Optional] If you changed the front-end code, use Node.js 22 or later and run `npm ci` followed by `npm run build` in *gui/*
 6. In Arduino: **Tools > ESP32 Sketch Data Upload** (this copies the contents of */data* to the µC's flash memory)
 
 ## First run
@@ -71,7 +71,9 @@ Visit `http://<DEVICE_IP>` to bring up the signal generator's UI, which is separ
 
 ### Front-End 
 
-The front-end is built using [Materialize](https://materializecss.com/). The number of static files has been reduced to its practical minimum due to limitations of the webserver. As a consequence, all image data is defined inline and only the CSS file is served separately from the HTML.
+The front-end is built using [Materialize](https://materializecss.com/). `npm run build` in *gui/* inlines the local CSS, JavaScript, images and font into *data/index.html*. The build uses Node.js without a bundler and replaces the previous page only after every asset has been read successfully. Run `npm test` in *gui/* to check the build and preview behavior.
+
+`npm run dev` builds the page once and previews it at `http://127.0.0.1:1234/`. Restart it after editing GUI sources; Parcel hot reload is no longer used. The preview serves only the generated page at `/`, returns 404 for other paths (including device API routes), and exits if port 1234 is already occupied. Device actions require uploading the page to the ESP32.
 
 ### Tools
 
