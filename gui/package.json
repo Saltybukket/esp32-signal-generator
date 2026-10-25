@@ -1,11 +1,14 @@
 {
+    "private": true,
+    "engines": {
+        "node": ">=22"
+    },
     "dependencies": {
-        "jquery": "^3.4.1",
-        "parcel": "^1.12.4",
-        "parcel-plugin-inliner": "^1.0.14"
+        "jquery": "3.7.1"
     },
     "scripts": {
-        "dev": "parcel index.html",
-        "build": "rm ../data/*; parcel build index.html; cp dist/index.html ../data"
+        "dev": "node dev.cjs",
+        "build": "node build.cjs",
+        "test": "node --test test/*.test.cjs"
     }
 }

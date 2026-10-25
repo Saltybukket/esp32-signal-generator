@@ -1,6 +1,3 @@
-var jquery = require("jquery");
-window.$ = window.jQuery = jquery;
-
 function switchContainer(container_name) {
     var active_container = $(`#${container_name}_container`);
     if (active_container.data('active') == 'true') { return; }
